@@ -1,6 +1,7 @@
-const Home = () => {
+const Home = ({ title, Component}) => {
     return (
-        <h1>Home</h1>
+        <>
+        </>
     )
 }
 
