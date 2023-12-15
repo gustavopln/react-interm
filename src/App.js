@@ -11,19 +11,20 @@ import Home from './pages/Home'
 import Customers from './pages/Customers'
 
 const App = () => {
-  return (
-    <TemplateDefault>
+  return (    
       <Router>
-        <Switch>
-          <Route path="/customers">
-            <TemplatePage title="Clientes" Component={Customers} />
-          </Route>
-          <Route path="/">
-            <TemplatePage title="Página Inicial" Component={Home} />            
-          </Route>
-        </Switch>
+        <TemplateDefault>
+          <Switch>
+            <Route path="/customers">
+              <TemplatePage title="Clientes" Component={Customers} />
+            </Route>
+            <Route path="/">
+              <TemplatePage title="Página Inicial" Component={Home} />            
+            </Route>
+          </Switch>
+        </TemplateDefault>
       </Router>
-    </TemplateDefault>
+    
   )
 }
 
