@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import { TextField, Button } from "@material-ui/core"
 
+import Toasty from '../../components/Toasty'
+
 const useStyles = makeStyles((theme) => ({
     wrapper: {
         margin: theme.spacing(3),
@@ -26,6 +28,9 @@ const Register = () => {
         },
     })
 
+    const [openToasty, setOpenToasty] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+
     const handleInputChange = (e) => {
         const { name, value } = e.target
 
@@ -38,6 +43,7 @@ const Register = () => {
     }
 
     const handleRegisterButton = () => {
+        setIsLoading(true)
         let hasError = false
         let newFormState = {
             ...form,
@@ -68,7 +74,8 @@ const Register = () => {
             name: form.name.value,
             job: form.job.value,
         }).then((response) => {
-            console.log('ok', response)
+            setOpenToasty(true)
+            setIsLoading(false)
         })
     }
 
@@ -96,10 +103,19 @@ const Register = () => {
                     onChange={handleInputChange} />
             </div>
             <div className={classes.wrapper}>
-                <Button variant="contained" color="primary" onClick={handleRegisterButton}>
-                    Cadastrar
+                <Button variant="contained" color="primary" onClick={handleRegisterButton} disabled={isLoading}>
+                    {
+                        isLoading ? 'Aguarde...' : 'Cadastrar'
+                    }
                 </Button>
             </div>
+            <Toasty 
+                open={openToasty} 
+                text="Cadastro Realizado com sucesso!"
+                severity="success"
+                onClose={() => setOpenToasty(false)} 
+                 
+            />
         </>
     )
 }
