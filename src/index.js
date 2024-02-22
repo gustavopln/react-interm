@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { AuthProvider } from './state/auth'
 
 import App from './App';
 import './index.css'
@@ -18,10 +19,13 @@ const theme = createMuiTheme({
   },
 });
 
+/** Faz mais sentido user os provider no index e não no App, assim o App gerencie as Rotas e o Index gerencie as configurações de estado, um context Api */
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>  
     </ThemeProvider>    
   </React.StrictMode>,
   document.getElementById('root')
